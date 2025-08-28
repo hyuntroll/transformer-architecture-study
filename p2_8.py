@@ -27,7 +27,7 @@ class MultiheadAttention(nn.Module):
         keys = self.weight_k(keys).view(B, T, self.n_head, C // self.n_head).transpose(1, 2)
         values = self.weight_v(values).view(B, T, self.n_head, C // self.n_head).transpose(1, 2)
 
-        # 각각의 어텐션을 구함 h번 수행하게 됨
+        # 각각의 어텐션을 구함 h번 하게 됨
         attention = compute_attention(querys, keys, values, self.is_causal)
 
         #입력과 같은 형태로 변환
@@ -60,4 +60,4 @@ if __name__ == "__main__":
     mh_attention = MultiheadAttention(embedding_dim, embedding_dim, n_head)
     after_attention_embeddings = mh_attention(input_embeddings, input_embeddings, input_embeddings)  
 
-    print(input_embeddings.shape, after_attention_embeddings)
+    print(input_embeddings.shape, after_attention_embeddings.shape)
