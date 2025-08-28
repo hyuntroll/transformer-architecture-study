@@ -1,4 +1,5 @@
 import torch
+from p2_5 import compute_attention
 
 # 띄어쓰기 단위로 분리
 input_text = "지금 심각한 문제가 발생함"
@@ -22,15 +23,18 @@ input_embeddings = token_embeddings + position_embeddings  # 최종 입력 임�
 
 head_dim = 16
 
-#쿼리 키 값을 계산하기 위한 변환 ( 가중치는 nn.Linear층을 사용하여 구현 가능 )
+#쿼리 키 값을 계산하기 위한 변환 ( 가중치는 nn.Linear층을 사용하여 구현 가능 ) Wk, Wq, Wv를 만드는 과정
 weight_q = torch.nn.Linear(embedding_dim, head_dim)
 weight_k = torch.nn.Linear(embedding_dim, head_dim)
 weight_v = torch.nn.Linear(embedding_dim, head_dim)
 
-# 변환 수행
+# 변환 수행 k1, q1, v1를 만드는 과정
 querys = weight_q(input_embeddings)
 keys = weight_k(input_embeddings)
 values = weight_v(input_embeddings)
 
-# print(querys, keys, values)
+
+
+context = compute_attention(querys, keys, values)
+print(context)
 
