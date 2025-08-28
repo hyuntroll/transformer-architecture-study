@@ -11,6 +11,8 @@ from p2_x import generate_input_embedding
 norm_x = (백터x - x의 평균) / x의 표준편차
 
 평균이 0, 표편이 1인 분포를 가지게 됨
+
+
 """
 
 embedding_dim = 16
